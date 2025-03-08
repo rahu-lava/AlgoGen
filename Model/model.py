@@ -8,7 +8,7 @@ from sklearn.metrics import mean_squared_error, r2_score
 from scipy.sparse import hstack
 
 # 1️⃣ Load Data
-file_path = "user_4.xlsx"  # Change this to your xlsx file
+file_path = "user_3.xlsx"  # Change this to your xlsx file
 df = pd.read_excel(file_path)
 
 # 2️⃣ Preprocessing
