@@ -1,0 +1,320 @@
+{% extends '../blocks/dashboard_block.html' %}
+{% block title %}Home{% endblock title %}
+
+{% block css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+<!-- <link rel="stylesheet" href="{% static 'css/home_responive.css' %}"> -->
+<style>
+  * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+
+  
+  .container {
+      max-width: 76%;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 20px;
+  }
+  
+  @media (max-width: 768px) {
+      .container {
+          grid-template-columns: 1fr;
+      }
+  }
+  
+  .box {
+      background-color: white;
+      padding: 10px 25px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #333;
+  }
+  
+  h2 {
+      margin-bottom: 20px;
+      color: #4a6fdc;
+      border-bottom: 2px solid #eee;
+      padding-bottom: 10px;
+  }
+  
+  .data-item {
+      margin-bottom: 15px;
+  }
+  
+  .data-label {
+      font-weight: 600;
+      color: #555;
+      margin-bottom: 5px;
+  }
+  
+  .data-value {
+      background-color: #f9f9f9;
+      padding: 10px;
+      border-radius: 4px;
+      border-left: 3px solid #4a6fdc;
+  }
+  
+  .keyword-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+  }
+  
+  .keyword {
+      background-color: #f0f0f0;
+      padding: 5px 10px;
+      border-radius: 20px;
+      display: inline-block;
+      font-size: 14px;
+  }
+  
+  .match-box {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: fit-content;
+  }
+  
+  .match-title {
+      font-size: 22px;
+      margin-bottom: 30px;
+  }
+  
+  .match-percentage {
+      font-size: 48px;
+      font-weight: bold;
+      color: #4a6fdc;
+      margin: 20px 0;
+      filter: blur(10px);
+      cursor: pointer;
+      user-select: none;
+  }
+  
+  .match-text {
+      font-size: 16px;
+      color: #666;
+      margin-bottom: 20px;
+  }
+  
+  /* Modal styles */
+  .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 100;
+      justify-content: center;
+      align-items: center;
+  }
+  
+  .modal-content {
+      background-color: white;
+      padding: 30px;
+      border-radius: 8px;
+      max-width: 500px;
+      width: 90%;
+      text-align: center;
+      position: relative;
+  }
+  
+  .close-modal {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 24px;
+      cursor: pointer;
+      color: #999;
+  }
+  
+  .subscription-title {
+      font-size: 24px;
+      margin-bottom: 15px;
+      color: #4a6fdc;
+  }
+  
+  .subscription-text {
+      margin-bottom: 25px;
+      line-height: 1.6;
+  }
+  
+  .subscription-button {
+      background-color: #4a6fdc;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s;
+  }
+  
+  .subscription-button:hover {
+      background-color: #3a5fc8;
+  }
+</style>
+{% endblock css %}
+{% block content %}
+<!-- Display the user's data after form submission -->
+
+<h1>Your Resume Data</h1>
+
+
+<div class="container">
+    <div class="box profile-box">
+        <h2 class="d-flex justify-content-between">Your Profile
+            <a href="{% url 'dashboard:resume' %}">
+            <button class="btn btn-success">Edit</button>
+        </a>
+        </h2>
+        <div class="data-item">
+            <div class="data-label">Name</div>
+            <div class="data-value" id="skills-value">
+              {% if user %}
+                {{ user.first_name }} {{ user.last_name }}
+              {% else %}
+              Loading...
+              {% endif %}
+            </div>
+        </div>
+
+        <div class="data-item">
+            <div class="data-label">Email</div>
+            <div class="data-value" id="skills-value">
+              {% if user.email %}
+                {{ user.email }} 
+              {% else %}
+              Loading...
+              {% endif %}
+            </div>
+        </div>
+
+        <div class="data-item">
+            <div class="data-label">Skills</div>
+            <div class="data-value" id="skills-value">
+                {% if u_resume %}
+                {{u_resume.skills}}
+                {% else %}
+                Loading...
+                {% endif %}
+            </div>
+        </div>
+        
+        <div class="data-item">
+            <div class="data-label">Experience</div>
+            <div class="data-value" id="experience-value">
+                {% if u_resume %}
+                {{u_resume.experience}}
+              {% else %}
+              Loading...
+              {% endif %}
+            </div>
+        </div>
+        
+        <div class="data-item">
+            <div class="data-label">Position</div>
+            <div class="data-value" id="position-value">
+                {% if u_resume %}
+                {{ u_resume.position }} 
+              {% else %}
+              Loading...
+              {% endif %}
+            </div>
+        </div>
+        
+        <div class="data-item">
+            <div class="data-label">Keywords</div>
+            <div class="data-value">
+                <div class="keyword-container" id="keywords-value">
+                    {% if u_resume %}
+                    {{ u_resume.keywords }} 
+                  {% else %}
+                  Loading...
+                  {% endif %}
+                </div>
+            </div>
+        </div>
+        
+        <div class="data-item">
+            <div class="data-label">English Level</div>
+            <div class="data-value" id="english-value">
+                {% if u_resume %}
+                {{ u_resume.english_level }} 
+              {% else %}
+              Loading...
+              {% endif %}
+            </div>
+        </div>
+    </div>
+    
+    <div class="box match-box">
+        <div class="match-title">Your Resume Match</div>
+        <div class="match-text">Based on current company trends, your resume matches:</div>
+        <div class="match-percentage" id="match-percentage">78%</div>
+        <div class="match-text">Click on the percentage to see detailed analysis</div>
+    </div>
+</div>
+
+<!-- Subscription Modal -->
+<div class="modal" id="subscription-modal">
+    <div class="modal-content">
+        <span class="close-modal" id="close-modal">&times;</span>
+        <h3 class="subscription-title">Unlock Premium Features</h3>
+        <p class="subscription-text">
+            Subscribe to our premium plan to see your exact resume match percentage and get detailed recommendations to improve your chances of getting hired.
+        </p>
+        <button class="subscription-button">Subscribe Now</button>
+    </div>
+</div>
+
+<br><br>
+
+
+
+{% endblock content %}
+{% block javascripts %}
+{% load static %}
+<script>
+  // Simulate loading data from the previous form
+  // In a real application, you would get this from localStorage, URL parameters, or a server
+  document.addEventListener('DOMContentLoaded', function() {
+      
+
+      // Modal functionality
+      const modal = document.getElementById('subscription-modal');
+      const matchPercentage = document.getElementById('match-percentage');
+      const closeModal = document.getElementById('close-modal');
+      
+      matchPercentage.addEventListener('click', function() {
+          modal.style.display = 'flex';
+      });
+      
+      closeModal.addEventListener('click', function() {
+          modal.style.display = 'none';
+      });
+      
+      // Close modal when clicking outside
+      window.addEventListener('click', function(event) {
+          if (event.target === modal) {
+              modal.style.display = 'none';
+          }
+      });
+  });
+</script>
+
+{% endblock javascripts %}

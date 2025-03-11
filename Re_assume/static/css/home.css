@@ -1,0 +1,187 @@
+.job_cards{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.w-20{
+    width: 20%;
+}
+
+.w-60{
+    width: 60%;
+}
+.profile-3{
+    background-image: url('../../media/logos/image.png');
+    height: max-content;
+}
+.container-part{
+    height: fit-content;
+}
+
+.add_pad{
+    padding: 0 .5rem 1.1rem;
+}
+.info-card {
+    display: inline-block;
+    padding: 0px 8px;
+    background: #9aabed40;
+    font-size: 14px;
+    font-weight: 350;
+    margin: 4px;
+    min-width: max-content;
+}
+
+.card-p{
+    padding: 0;
+    margin: 0;
+}
+.card-updated{
+    padding: 0;
+    margin: 0;
+    text-align: end;
+}
+
+
+.rotate{
+    transform: rotate(180deg);
+}
+.container1{
+    background: white;
+}
+.container1 > p{
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0;
+    padding: 0;
+}
+
+.filter_devide{
+    color: inherit;
+    background: #8c8b8b;
+    height: 1.5px;
+    border: 0;
+    border-top: var(--bs-border-width) solid;
+    opacity: .25;
+}
+
+.container2{
+    width: 40%;
+}
+.container3 > div{
+    background: white;
+}
+.container3>div{
+    margin-bottom: .5rem;
+}
+.autocomplete-items{
+    position: absolute;
+    border: 1px solid rgb(204, 204, 204);
+    background-color: rgb(255, 255, 255);
+    z-index: 1;
+    top: 142px;
+    right: 450px;
+    width: 404px;
+    height: fit-content;
+    max-height: 209px;
+    overflow-y: auto;
+}
+/* .autocomplete-items{
+    overflow: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none; 
+  }
+
+.autocomplete-items::-webkit-scrollbar {
+    display: none; 
+  } */
+.autocomplete-item{
+    font-size: larger;
+    padding: 5px;
+}
+.autocomplete-item:hover {
+    background: #8080802e;
+}
+.exp_val{
+    position: relative;
+    background: #0075ff;
+    color: white;
+    font-size: 15px;
+    border-radius: 14px;
+    padding: 2px 12px;
+}
+#experience_value_0{
+left: -27px;
+}
+#experience_value_1{
+left: 11px
+}
+#experience_value_2{
+left: 36px
+}
+#experience_value_3{
+left: 70px
+}
+#experience_value_4{
+left: 102px
+}
+#experience_value_5{
+left: 138px
+}
+#experience_value_6{
+left: 189px
+}
+.applied-filter {
+    align-items: center;
+    justify-content: space-between;
+    padding: 2px 5px;
+    background: #ebf3fe;
+    border: 2px solid #003c9685;
+    border-radius: 17px;
+    font-size: small;
+    color: #003c96;
+    width: fit-content;
+    margin-bottom: 4px;
+    display: inline-block;
+}
+
+div#city_suggestions:empty {
+    display: none;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.section-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+#preference{
+    border: none;
+}
+.preference-grid {
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+}
+
+.preference-item {
+    margin-bottom: 16px;
+}
+
+
+.preference-value {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 4px;
+}
+.preference-label {
+    font-size: 16px;
+    color: #333;
+}
